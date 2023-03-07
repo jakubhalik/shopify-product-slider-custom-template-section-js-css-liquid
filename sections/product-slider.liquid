@@ -1,0 +1,63 @@
+{%- capture flickity_options -%}
+    {
+        "prevNextButtons": true,
+        "pageDots": true,
+        "cellAlign": "left",
+        "groupCells": true,
+        "arrowShape": {"x0": 20, "x1": 40, "y1": 40, "x2": 60, "y2": 35, "x3": 25}
+    }
+{%- endcapture -%}
+
+<div class="page-width">
+    {% if section.settings.title != blank %}
+        <h2 class="center">{{ section.settings.title | escape }}</h2>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign product_limit = section.settings.product_count -%}
+
+    <div class="products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
+        {% for product in collection.products limit: product_limit %}
+            <div>
+                <a href="{{ product.url | within: collection }}">
+                    <img src="{{ product.featured_image | img_url: 'master' }}">
+                    <h4>{{ product.title }}</h4>
+                    <p>{{ product.price | money }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Slider Produktů",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Nadpis",
+            "default": "Nadpis pro kolekci produktů"
+        },
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Kolekce"
+        },
+        {
+            "type": "range",
+            "id": "product_count",
+            "min": 4,
+            "max": 50,
+            "label": "Množství produktů, které budou v slideru",
+            "default": 8
+        }
+    ],
+    "presets": [
+        {
+            "category": "Collection",
+            "name": "Product Slider",
+            "settings": {}
+        }
+    ]
+}
+{% endschema %}

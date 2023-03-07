@@ -1,0 +1,1 @@
+# IDS-shopify-product-slider-js-css-liquid

@@ -1,36 +1,87 @@
-{%- capture flickity_options -%}
-    {
-        "prevNextButtons": true,
-        "pageDots": true,
-        "cellAlign": "left",
-        "groupCells": true,
-        "arrowShape": {"x0": 20, "x1": 40, "y1": 40, "x2": 60, "y2": 35, "x3": 25}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'template-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
     }
-{%- endcapture -%}
+  }
+{%- endstyle -%}
 
-<div class="page-width">
-    {% if section.settings.title != blank %}
-        <h2 class="center">{{ section.settings.title | escape }}</h2>
-    {% endif %}
-
-    {%- assign collection = collections[section.settings.collection] -%}
-    {%- assign product_limit = section.settings.product_count -%}
-
-    <div class="products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
-        {% for product in collection.products limit: product_limit %}
-            <div>
-                <a href="{{ product.url | within: collection }}">
-                    <img src="{{ product.featured_image | img_url: 'master' }}">
-                    <h4>{{ product.title }}</h4>
-                    <p>{{ product.price | money }}</p>
-                </a>
-            </div>
-        {% endfor %}
+<div class="isolate gradient">
+    <div class="collection section-{{ section.id }}-padding">
+        {% if section.settings.title != blank %}
+            <h2 class="page-width center product-slider--h2"
+                style="padding-bottom: 10px">
+                {{ section.settings.title | escape }}</h2>
+        {% endif %}
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- assign product_limit = section.settings.product_count -%}
+        <slider-component class="slider-mobile-gutter slider-component-desktop">
+            <ul id="Slider-{{ section.id }}"
+                class="grid product-grid contains-card 
+                       contains-card--product contains-card--standard 
+                       grid--4-col-desktop
+                       grid--2-col-tablet-down slider 
+                       slider--desktop slider--tablet grid--peek"
+                role="list"
+                aria-label="{{ 'general.slider.name' | t }}">
+                {% for product in collection.products limit: product_limit %}
+                    <li id="Slide-{{ section.id }}-{{ forloop.index }}"
+                        class="grid__item slider__slide">
+                        {% render 'card-product',
+                            card_product: product,
+                            media_aspect_ratio: section.settings.image_ratio,
+                            show_secondary_image: section.settings.show_secondary_image,
+                            section_id: section.id
+                        %}
+                {% endfor %}
+                {% if collection.products.size > product_limit %}
+                    <li class="grid__item slider__slide"
+                        style="display: flex; justify-content: center; align-items: center;">
+                        <a href="{{ section.settings.collection.url }}"
+                           class="button button--secondary">
+                        {{ 'sections.featured_collection.view_all' | t }}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </slider-component>
     </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('#Slider-{{ section.id }} img');
+    let firstImageHeight = 0;
+    images.forEach(image => {
+      const height = image.height;
+      if (height > firstImageHeight) {
+        firstImageHeight = height;
+      }
+    });
+    const lastSlide = document.querySelector('#Slider-{{ section.id }} li:last-of-type');
+    lastSlide.style.height = firstImageHeight + 'px';
+  });
+</script>
+
+
 {% schema %}
 {
-    "name": "Slider Produktů",
+    "name": "Slider produktů",
     "settings": [
         {
             "type": "text",
@@ -46,16 +97,62 @@
         {
             "type": "range",
             "id": "product_count",
-            "min": 4,
+            "min": 1,
             "max": 50,
             "label": "Množství produktů, které budou v slideru",
             "default": 8
+        },
+        {
+            "type": "select",
+            "id": "image_ratio",
+            "options": [
+                {
+                    "value": "adapt",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+                },
+                {
+                    "value": "portrait",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+                },
+                {
+                    "value": "square",
+                    "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+                }
+            ],
+            "default": "portrait",
+            "label": "t:sections.featured-collection.settings.image_ratio.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_secondary_image",
+            "default": false,
+            "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 28
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 0
         }
     ],
     "presets": [
         {
             "category": "Collection",
-            "name": "Product Slider",
+            "name": "Slider produktů",
             "settings": {}
         }
     ]

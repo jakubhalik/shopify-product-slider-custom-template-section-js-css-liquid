@@ -76,7 +76,6 @@ slider-component.slider-component-full-width {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    scroll-padding-left: 1rem;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -165,18 +164,8 @@ slider-component.slider-component-full-width {
     padding-bottom: max(var(--focus-outline-padding), var(--shadow-padding-bottom));
   }
 
-  .slider--desktop .slider__slide:first-child {
-    margin-left: var(--desktop-margin-left-first-item);
-    scroll-margin-left: var(--desktop-margin-left-first-item);
-  }
-
   .slider-component-full-width .slider--desktop {
     scroll-padding-left: 1.5rem;
-  }
-
-  .slider-component-full-width .slider--desktop .slider__slide:first-child {
-    margin-left: 1.5rem;
-    scroll-margin-left: 1.5rem;
   }
 
   /* Fix to show some space at the end of our sliders in all browsers */
@@ -194,6 +183,12 @@ slider-component.slider-component-full-width {
 
   .slider--desktop.grid--3-col-desktop .grid__item {
     width: calc( (100% - var(--desktop-margin-left-first-item)) / 3 - var(--grid-desktop-horizontal-spacing) * 4);
+  }
+
+  @media (min-width: 1900px) {
+    .slider--desktop.grid--3-col-desktop .grid__item {
+      width: calc( (115% - 1.15 * var(--desktop-margin-left-first-item)) / 3 - 1.15 * var(--grid-desktop-horizontal-spacing) * 4);
+    }
   }
 
   .slider--desktop.grid--2-col-desktop .grid__item {
@@ -323,10 +318,12 @@ slider-component.slider-component-full-width {
   color: rgb(var(--color-foreground));
 }
 
-.slider-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (min-width: 768px) {
+  .slider-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media screen and (min-width: 990px) {

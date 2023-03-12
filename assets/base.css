@@ -249,6 +249,14 @@ html.no-js .no-js-hidden {
   padding: 0 1.5rem;
 }
 
+@media (max-width: 1900px) {
+  .page-width--product-slider {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+}
+
 .page-width-desktop {
   padding: 0;
   margin: 0 auto;
@@ -256,6 +264,10 @@ html.no-js .no-js-hidden {
 
 @media screen and (min-width: 750px) {
   .page-width {
+    padding: 0 5rem;
+  }
+
+  .page-width--product-slider {
     padding: 0 5rem;
   }
 
@@ -459,12 +471,19 @@ h2,
 
 h2,
 .product-slider--h2 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-size: calc(var(--font-heading-scale) * 2.5rem);
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
+    font-size: calc(var(--font-heading-scale) * 3.4rem);
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  h2,
+  .product-slider--h2 {
     font-size: calc(var(--font-heading-scale) * 3.4rem);
   }
 }
@@ -1170,10 +1189,6 @@ summary::-webkit-details-marker {
     min-width: 35%;
   }
 
-  .grid--peek.slider .grid__item:first-of-type {
-    margin-left: 1.5rem;
-  }
-
   /* Fix to show some space at the end of our sliders in all browsers */
   .grid--peek.slider:after {
     margin-left: calc(-1 * var(--grid-mobile-horizontal-spacing));
@@ -1206,10 +1221,6 @@ summary::-webkit-details-marker {
   .slider--tablet.grid--peek.grid--2-col-tablet .grid__item,
   .slider--tablet.grid--peek.grid--2-col-tablet-down .grid__item {
     width: calc(50% - var(--grid-desktop-horizontal-spacing) - 3rem);
-  }
-
-  .slider--tablet.grid--peek .grid__item:first-of-type {
-    margin-left: 1.5rem;
   }
 
   .grid--2-col-tablet-down .grid__item {
@@ -2997,4 +3008,10 @@ details-disclosure > details {
   .localization-form__select:focus {
     outline: transparent solid 1px;
   }
+}
+
+/* Dev additions */
+.justify-between {
+  display: flex;
+  justify-content: space-between;
 }

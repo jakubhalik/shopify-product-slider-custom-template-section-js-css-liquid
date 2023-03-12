@@ -22,20 +22,29 @@
   }
 {%- endstyle -%}
 
-<div class="isolate gradient">
+{%- assign collection = collections[section.settings.collection] -%}
+{%- assign product_limit = section.settings.product_count -%}
+<div class="isolate gradient page-width--product-slider">
     <div class="collection section-{{ section.id }}-padding">
-        {% if section.settings.title != blank %}
-            <h2 class="page-width center product-slider--h2"
-                style="padding-bottom: 10px">
-                {{ section.settings.title | escape }}</h2>
-        {% endif %}
-        {%- assign collection = collections[section.settings.collection] -%}
-        {%- assign product_limit = section.settings.product_count -%}
+        <div class="justify-between" style="padding-bottom: 10px">
+            {% if section.settings.title != blank %}
+                <span class="product-slider--h2"
+                      style="line-height: 1">
+                    {{ section.settings.title | escape }}</span>
+            {% endif %}
+                <a href="{{ section.settings.collection.url }}"
+                   class="button button--secondary"
+                   style="min-height: 3rem;
+                          max-height: 5rem;
+                          min-width: 1rem;
+                          max-width: 12rem;">
+                    {{ 'sections.featured_collection.view_all' | t }}</a>
+        </div>
         <slider-component class="slider-mobile-gutter slider-component-desktop">
             <ul id="Slider-{{ section.id }}"
                 class="grid product-grid contains-card 
                        contains-card--product contains-card--standard 
-                       grid--4-col-desktop
+                       grid--3-col-desktop
                        grid--2-col-tablet-down slider 
                        slider--desktop slider--tablet grid--peek"
                 role="list"
@@ -50,34 +59,29 @@
                             section_id: section.id
                         %}
                 {% endfor %}
-                {% if collection.products.size > product_limit %}
-                    <li class="grid__item slider__slide"
-                        style="display: flex; justify-content: center; align-items: center;">
-                        <a href="{{ section.settings.collection.url }}"
-                           class="button button--secondary">
-                        {{ 'sections.featured_collection.view_all' | t }}</a>
-                    </li>
-                {% endif %}
             </ul>
+            <div class="slider-buttons no-js-hidden">
+                <button
+                    type="button"
+                    class="slider-button slider-button--prev"
+                    name="previous"
+                    aria-label="{{ 'general.slider.previous_slide' | t }}"
+                    aria-controls="Slider-{{ section.id }}"
+                >
+                    {% render 'icon-caret' %}
+                <button
+                    type="button"
+                    class="slider-button slider-button--next"
+                    name="next"
+                    aria-label="{{ 'general.slider.next_slide' | t }}"
+                    aria-controls="Slider-{{ section.id }}"
+                >
+                    {% render 'icon-caret' %}
+                </button>
+            </div>
         </slider-component>
     </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const images = document.querySelectorAll('#Slider-{{ section.id }} img');
-    let firstImageHeight = 0;
-    images.forEach(image => {
-      const height = image.height;
-      if (height > firstImageHeight) {
-        firstImageHeight = height;
-      }
-    });
-    const lastSlide = document.querySelector('#Slider-{{ section.id }} li:last-of-type');
-    lastSlide.style.height = firstImageHeight + 'px';
-  });
-</script>
-
 
 {% schema %}
 {
@@ -100,7 +104,7 @@
             "min": 1,
             "max": 50,
             "label": "Množství produktů, které budou v slideru",
-            "default": 8
+            "default": 10
         },
         {
             "type": "select",
@@ -125,7 +129,7 @@
         {
             "type": "checkbox",
             "id": "show_secondary_image",
-            "default": false,
+            "default": true,
             "label": "t:sections.featured-collection.settings.show_secondary_image.label"
         },
         {

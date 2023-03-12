@@ -3015,3 +3015,32 @@ details-disclosure > details {
   display: flex;
   justify-content: space-between;
 }
+
+.pr-1p6rm-3r {
+  padding-right: 1.6rem;
+}
+
+@media (min-width: 768px) {
+  .pr-1p6rm-3r {
+    padding-right: 3rem;
+  }
+}
+
+.pl-1rm-3r {
+  padding-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .pl-1rm-3r {
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mtm2p {
+    margin-top: 2px;
+  }
+  .mbm2p {
+    margin-bottom: 2px;
+  }
+}

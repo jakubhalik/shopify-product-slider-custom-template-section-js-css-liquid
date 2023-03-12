@@ -24,27 +24,28 @@
 
 {%- assign collection = collections[section.settings.collection] -%}
 {%- assign product_limit = section.settings.product_count -%}
-<div class="isolate gradient page-width--product-slider">
+<div class="isolate gradient">
     <div class="collection section-{{ section.id }}-padding">
-        <div class="justify-between" style="padding-bottom: 10px">
+        <div class="justify-between pr-1p6rm-3r" style="padding-bottom: 10px;">
             {% if section.settings.title != blank %}
-                <span class="product-slider--h2"
-                      style="line-height: 1">
+                <span class="product-slider--h2 pl-1rm-3r mtm2p"
+                      style="line-height: 1;">
                     {{ section.settings.title | escape }}</span>
             {% endif %}
                 <a href="{{ section.settings.collection.url }}"
-                   class="button button--secondary"
+                   class="button button--secondary mbm2p"
                    style="min-height: 3rem;
                           max-height: 5rem;
                           min-width: 1rem;
                           max-width: 12rem;">
                     {{ 'sections.featured_collection.view_all' | t }}</a>
         </div>
-        <slider-component class="slider-mobile-gutter slider-component-desktop">
+        <slider-component class="slider-mobile-gutter slider-component-desktop"
+                          style="padding-left: 1rem;">
             <ul id="Slider-{{ section.id }}"
                 class="grid product-grid contains-card 
                        contains-card--product contains-card--standard 
-                       grid--3-col-desktop
+                       grid--4-col-desktop
                        grid--2-col-tablet-down slider 
                        slider--desktop slider--tablet grid--peek"
                 role="list"

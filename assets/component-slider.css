@@ -318,11 +318,15 @@ slider-component.slider-component-full-width {
   color: rgb(var(--color-foreground));
 }
 
-@media (min-width: 768px) {
+.slider-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
   .slider-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
   }
 }
 

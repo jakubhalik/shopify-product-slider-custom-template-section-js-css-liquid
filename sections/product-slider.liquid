@@ -64,25 +64,78 @@
             <div class="slider-buttons--product-slider no-js-hidden">
                 <button
                     type="button"
-                    class="slider-button slider-button--prev"
+                    class="rotation absolute left-8 xl:left-14 translate-y-1/2
+                           w-5r h-5r flex justify-center items-center rounded-full
+                           shadow-md z-10 bg-255-t-0-b-n-bs-h-bg-0-t-255-b-n-bs
+                           display-none left-button"
                     name="previous"
                     aria-label="{{ 'general.slider.previous_slide' | t }}"
                     aria-controls="Slider-{{ section.id }}"
                 >
-                    {% render 'icon-caret' %}
+                <svg className="font-bold" width="3rem" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                     xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                      stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
+                </button>
                 <button
                     type="button"
-                    class="slider-button slider-button--next"
+                    class="absolute right-8 xl:right-14 translate-y-1/2
+                           w-5r h-5r flex justify-center items-center rounded-full
+                           shadow-md z-10 bg-255-t-0-b-n-bs-h-bg-0-t-255-b-n-bs
+                           right-button"
                     name="next"
                     aria-label="{{ 'general.slider.next_slide' | t }}"
                     aria-controls="Slider-{{ section.id }}"
                 >
-                    {% render 'icon-caret' %}
+                <svg className="font-bold" width="3rem" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+                     xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                      stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                </svg>
                 </button>
             </div>
         </slider-component>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('#Slider-{{ section.id }} img');
+    let firstImageHeight = 0;
+    images.forEach(image => {
+        const height = image.height;
+        if (height > firstImageHeight) {
+        firstImageHeight = height;
+        }
+    });
+    const overlays = document.querySelectorAll('.absolute');
+    overlays.forEach(overlay => {
+        const overlayHeight = overlay.offsetHeight;
+        const topOffset = (firstImageHeight - overlayHeight) / 2;
+        overlay.style.top = topOffset + 'px';
+      });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const leftButtons = document.querySelectorAll('.left-button');
+    leftButtons.forEach((button, index) => {
+      button.id = `left-button-${index + 1}`;
+    });
+
+    const rightButtons = document.querySelectorAll('.right-button');
+    rightButtons.forEach((button, index) => {
+      button.id = `right-button-${index + 1}`;
+      button.addEventListener('click', function() {
+        const leftBtn = document.getElementById(`left-button-${index + 1}`);
+        leftBtn.classList.remove('display-none');
+      });
+    });
+  });
+
+</script>
 
 {% schema %}
 {

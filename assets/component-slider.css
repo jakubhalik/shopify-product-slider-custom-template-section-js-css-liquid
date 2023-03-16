@@ -324,12 +324,13 @@ slider-component.slider-component-full-width {
   justify-content: center;
 }
 
+/*
 .slider-buttons--product-slider {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+*/
 @media (max-width: 768px) {
   .slider-buttons--product-slider {
     display: none;

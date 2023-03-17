@@ -102,22 +102,22 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const images = document.querySelectorAll('#Slider-{{ section.id }} img');
-    let firstImageHeight = 0;
-    images.forEach(image => {
-        const height = image.height;
-        if (height > firstImageHeight) {
-        firstImageHeight = height;
-        }
-    });
-    const overlays = document.querySelectorAll('.absolute');
-    overlays.forEach(overlay => {
-        const overlayHeight = overlay.offsetHeight;
-        const topOffset = (firstImageHeight - overlayHeight) / 2;
-        overlay.style.top = topOffset + 'px';
-      });
-});
+function centerOverlays() {
+  const images = document.querySelectorAll('#Slider-{{ section.id }} img');
+  let firstImageHeight = 0;
+  images.forEach(image => {
+    const height = image.height;
+    if (height > firstImageHeight) {
+      firstImageHeight = height;
+    }
+  });
+  const overlays = document.querySelectorAll('.absolute');
+  overlays.forEach(overlay => {
+    const overlayHeight = overlay.offsetHeight;
+    const topOffset = (firstImageHeight - overlayHeight) / 2;
+    overlay.style.top = topOffset + 'px';
+  });
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const leftButtons = document.querySelectorAll('.left-button');
@@ -131,10 +131,13 @@ document.addEventListener('DOMContentLoaded', function() {
       button.addEventListener('click', function() {
         const leftBtn = document.getElementById(`left-button-${index + 1}`);
         leftBtn.classList.remove('display-none');
+        centerOverlays();
       });
     });
   });
 
+document.addEventListener("DOMContentLoaded", centerOverlays);
+centerOverlays();
 </script>
 
 {% schema %}

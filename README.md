@@ -233,7 +233,7 @@ Some of the names in this code are in czech because I am a czech freelancer so f
 <br />
 But for you my friend here's all you have to change so you have everything named nicely in your language (just replace the inside of the schema with this):
 <br />
-``` js
+``` html
 {
     "name": "Product Slider",
     "settings": [

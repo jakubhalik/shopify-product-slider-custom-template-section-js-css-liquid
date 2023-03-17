@@ -3,7 +3,7 @@ So if you are using the dawn theme this will be really easy for you to implement
 <br />
 <br />
 Just create a .liquid file in your sections folder and copy the code from product-slider.liquid
-<br />
+
 ``` html
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -228,12 +228,10 @@ centerOverlays();
 {% endschema %}
 ```
 
-<br />
-<br />
-Some of the names in this code are in czech because I am a czech freelancer so for me personally it's better to have this repo in czech because those are the guys I will mostly implement for.
+# Some of the names in this code are in czech because I am a czech freelancer so for me personally it's better to have this repo in czech because those are the guys I will mostly implement for.
 <br />
 But for you my friend here's all you have to change so you have everything named nicely in your language (just replace the inside of the schema with this):
-<br />
+
 ``` html
 {
     "name": "Product Slider",
@@ -314,10 +312,8 @@ But for you my friend here's all you have to change so you have everything named
 }
 ```
 
-<br />
-<br />
-You'll also need to change the component-slider.css into
-<br />
+# You'll also need to change the component-slider.css into
+
 ``` css
 slider-component {
   --desktop-margin-left-first-item: max(5rem, calc((100vw - var(--page-width) + 10rem - var(--grid-desktop-horizontal-spacing)) / 2));
@@ -718,10 +714,8 @@ slider-component.slider-component-full-width {
 }
 ```
 
-<br />
-<br />
-And you will also need to add this in your css:
-<br />
+# And you will also need to add this in your css:
+
 ``` css
 .justify-between {
   display: flex;
@@ -852,10 +846,8 @@ And you will also need to add this in your css:
 }
 ```
 
-<br />
-<br />
-And as last also change the onButtonClick(event) in class SliderComponent to this:
-<br />
+# And as last also change the onButtonClick(event) in class SliderComponent to this:
+
 ``` js
 onButtonClick(event) {
     event.preventDefault();
@@ -868,6 +860,5 @@ onButtonClick(event) {
 }
 ```
 
-<br />
-<br />
-Now. I am a tailwind person. I like tailwind. I obviously did not add the entire tailwind to this theme to not waste time and to not risk collusion but I used tailwind classes + got a bit inspired by tailwind's class ways, love it or hate it, that's why the html in liquid is the way it is, some love it, some hate it, but it's smarter to love it.
+# Now. I am a tailwind person. I like tailwind. 
+I obviously did not add the entire tailwind to this theme to not waste time and to not risk collusion but I used tailwind classes + got a bit inspired by tailwind's class ways, love it or hate it, that's why the html in liquid is the way it is, some love it, some hate it, but it's smarter to love it.

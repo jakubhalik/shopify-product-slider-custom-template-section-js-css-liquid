@@ -4,7 +4,7 @@ So if you are using the dawn theme this will be really easy for you to implement
 <br />
 Just create a .liquid file in your sections folder and copy the code from product-slider.liquid
 <br />
-``` js
+``` html
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-rte.css' | asset_url | stylesheet_tag }}

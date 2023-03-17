@@ -227,6 +227,7 @@ centerOverlays();
 }
 {% endschema %}
 ```
+
 <br />
 <br />
 Some of the names in this code are in czech because I am a czech freelancer so for me personally it's better to have this repo in czech because those are the guys I will mostly implement for.
@@ -312,6 +313,7 @@ But for you my friend here's all you have to change so you have everything named
     ]
 }
 ```
+
 <br />
 <br />
 You'll also need to change the component-slider.css into
@@ -715,6 +717,7 @@ slider-component.slider-component-full-width {
   transform: rotate(90deg) scale(1.1);
 }
 ```
+
 <br />
 <br />
 And you will also need to add this in your css:
@@ -848,6 +851,7 @@ And you will also need to add this in your css:
   display: none;
 }
 ```
+
 <br />
 <br />
 And as last also change the onButtonClick(event) in class SliderComponent to this:
@@ -863,6 +867,7 @@ onButtonClick(event) {
   }
 }
 ```
+
 <br />
 <br />
 Now. I am a tailwind person. I like tailwind. I obviously did not add the entire tailwind to this theme to not waste time and to not risk collusion but I used tailwind classes + got a bit inspired by tailwind's class ways, love it or hate it, that's why the html in liquid is the way it is, some love it, some hate it, but it's smarter to love it.

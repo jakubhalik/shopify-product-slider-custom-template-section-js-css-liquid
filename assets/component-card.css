@@ -124,7 +124,7 @@
 
 .card__information {
   grid-row-start: 2;
-  padding: 1.3rem 1rem;
+  padding: 0.75rem 1rem;
 }
 
 .card:not(.ratio) > .card__content {
@@ -133,8 +133,8 @@
 
 @media screen and (min-width: 750px) {
   .card__information {
-    padding-bottom: 1.7rem;
-    padding-top: 1.7rem;
+    padding-bottom: 0.85rem;
+    padding-top: 0.85rem;
   }
 }
 
@@ -352,7 +352,7 @@
 .card-information
   > *:not(.visually-hidden:first-child)
   + *:not(.rating) {
-  margin-top: 0.7rem;
+  margin-top: 0.35rem;
 }
 
 .card-information .caption {

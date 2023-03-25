@@ -862,3 +862,6 @@ onButtonClick(event) {
 
 # Now. I am a tailwind person. I like tailwind. 
 I obviously did not add the entire tailwind to this theme to not waste time and to not risk collusion but I used tailwind classes + got a bit inspired by tailwind's class ways, love it or hate it, that's why the html in liquid is the way it is, some love it, some hate it, but it's smarter to love it.
+<br />
+<br />
+Besides all this there are some other changes from the regular dawn theme, u're welcome to try to use this theme.
